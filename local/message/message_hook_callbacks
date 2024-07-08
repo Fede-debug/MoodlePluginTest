@@ -1,0 +1,33 @@
+<?php
+// This file is part of Moodle Course Rollover Plugin
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * @package     local_message
+ * @author      Federico
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @var stdClass $plugin
+ */
+
+
+//  class message_hook_callbacks {
+
+    
+//     public static function standard_footer_html(\core\hook\output\before_standard_footer_html_generation $hook): void {
+//         // A returned 0 means that the setting was set and disabled, false means that there is no value for the provided setting.
+
+//             $hook->process_legacy_callbacks();
+//     }
+// }
