@@ -1,10 +1,12 @@
 ---- initial commit has onlly a single plugin, located in moodle/local/message
----- plus I've modified the class lib/outputrendere.php for the hook callback to work 
+---- plus I've modified the class lib/outputrenderers.php for the hook callback to work 
 ---- it uses the new hook system (Moodle 4+)
 
 -----        $hookCustomExecution = new before_footer_custom_execution($this);
 -----        //$hookCustomExecution->kill_everything();
 -----       di::get(hook_manager::class)->dispatch($hookCustomExecution);
+
+---- also the hook execution is in core\hook\output\before_footer_custom_execution
 
 
 

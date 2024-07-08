@@ -62,7 +62,7 @@ final class before_footer_custom_execution {
 
 
         $sql = "SELECT lm.id, lm.messagetext, lm.messagetype FROM {local_message} lm
-                left join {local_message_read} lmr ON lm.id = lmr.messageid
+                LEFT JOIN {local_message_read} lmr ON lm.id = lmr.messageid
                 WHERE lmr.userid != :userid OR lmr.userid IS NULL";
 
         $params = [

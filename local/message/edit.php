@@ -43,7 +43,7 @@ $mform = new edit();
 
 // Form processing and displaying is done here.
 if ($mform->is_cancelled()) {
-    redirect($CFG->wwwroot . '/local/message/manage.php', message: 'You cancelled the message form');
+    redirect($CFG->wwwroot . '/local/message/manage.php', message: get_string('cancelled_form', 'local_message'));
     
 } else if ($fromform = $mform->get_data()) {
     // When the form is submitted, and the data is successfully validated,
@@ -54,7 +54,7 @@ if ($mform->is_cancelled()) {
 
     $DB->insert_record('local_message', $recordToInsert);
 
-    redirect($CFG->wwwroot . '/local/message/manage.php', message: 'you created this message: ' . $fromform->messagetext);
+    redirect($CFG->wwwroot . '/local/message/manage.php', message: get_string('posted_form', 'local_message') . $fromform->messagetext);
 
 }
 
