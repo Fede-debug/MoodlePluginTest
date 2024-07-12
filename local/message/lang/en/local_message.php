@@ -27,4 +27,5 @@ $string['message_type'] = 'Message Type';
 $string['message_text'] = 'Message Text';
 $string['cancelled_form'] = 'You cancelled the message form';
 $string['posted_form'] = 'you created this message: ';
+$string['updated_posted_form'] = 'you updated this message: ';
 $string['manage_messages'] = 'Manage messages';

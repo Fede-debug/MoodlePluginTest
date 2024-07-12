@@ -25,11 +25,14 @@
  */
 
  require_once(__DIR__ . '/../../config.php');
+
+ global $DB;
+
  $PAGE->set_url(new moodle_url(url: '/local/message/manage.php'));
  $PAGE->set_context(\core\context\system::instance());
  $PAGE->set_title(title: get_string('manage_messages', 'local_message'));
 
- $messages = $DB->get_records('local_message');
+ $messages = $DB->get_records('local_message', null, 'id');
 
  echo $OUTPUT->header();
 

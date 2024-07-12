@@ -35,12 +35,12 @@
  $PAGE->set_context(\core\context\system::instance());
  $PAGE->set_title(title: 'Edit');
 
-
+$messageid = optional_param('messageid', null, PARAM_INT);
 
  //echo '<h1>Hello World></h1>';
 $mform = new local_message\edit();
 
-
+$manager = new local_message\message_manager();
 
 
 // Form processing and displaying is done here.
@@ -51,13 +51,31 @@ if ($mform->is_cancelled()) {
     // When the form is submitted, and the data is successfully validated,
     // the `get_data()` function will return the data posted in the form.
 
-    $manager = new local_message\message_manager();
+    if($fromform->id)
+{
+    $manager->update_message($fromform->id, $fromform->messagetext, $fromform->messagetype);
+    redirect($CFG->wwwroot . '/local/message/manage.php', message: get_string('updated_posted_form', 'local_message') . $fromform->messagetext);
+}
+
+    
     $manager->create_message($fromform->messagetext, $fromform->messagetype);
-
-
-
     redirect($CFG->wwwroot . '/local/message/manage.php', message: get_string('posted_form', 'local_message') . $fromform->messagetext);
 
+}
+
+if ($messageid) {
+    global $DB;
+    // $message=$DB->get_record('local_message', ['id' => $messageid]);
+
+    $manager = new local_message\message_manager();
+    $message = $manager->get_message($messageid);
+
+
+    $mform->set_data($message);
+
+    if(!$message){
+        throw new invalid_parameter_exception('Message not found');
+    }
 }
 
 

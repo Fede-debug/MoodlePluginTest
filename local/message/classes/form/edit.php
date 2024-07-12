@@ -35,6 +35,10 @@ class edit extends moodleform {
         // A common convention is to store it in a variable, such as `$mform`.
         $mform = $this->_form; // Don't forget the underscore!
 
+
+        $mform->addElement('hidden', 'id');
+        $mform->setType('id', PARAM_INT);
+
         // Add elements to your form.
         $mform->addElement('text', 'messagetext', get_string('message_text', 'local_message'));
 

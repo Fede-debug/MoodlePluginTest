@@ -44,6 +44,21 @@ class message_manager
         }
     }
 
+    public function update_message(int $id, string $message_text, string $message_type) : bool{
+        global $DB;
+
+        $recordToUpdate= new \stdClass();
+        $recordToUpdate->id = $id;
+        $recordToUpdate->messagetext = $message_text;
+        $recordToUpdate->messagetype = $message_type;
+
+        try {
+            return $DB->update_record('local_message', $recordToUpdate);
+        } catch (\dml_exception $e) {
+            return false;
+        }
+    }
+
     public function get_messages($userid): array
     {
         global $DB, $USER;
@@ -85,5 +100,18 @@ class message_manager
         {
             return false;
         }       
+    }
+
+    public function get_message(int $messageid): object
+    {
+        global $DB;
+        $message=$DB->get_record('local_message', ['id' => $messageid]);
+
+        try {
+
+            return $message=$DB->get_record('local_message', ['id' => $messageid]);
+        } catch (\dml_exception $e) {
+            return false;
+        }
     }
 }
