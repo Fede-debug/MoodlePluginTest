@@ -24,7 +24,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'local_message';
-$plugin->version = 2020072203;
+$plugin->version = 2020082703;
 $plugin->requires = 2016052300; // Moodle version
 
 

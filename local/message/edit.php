@@ -23,11 +23,13 @@
  * @copyright  Federico Diana
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+use local_message\core\message_manager;
 
  $dirroot = $CFG->dirroot;
 
  require_once(__DIR__ . '/../../config.php');
  require_once($CFG->dirroot .'/local/message/classes/form/edit.php');
+ require_once($CFG->dirroot .'/local/message/classes/message_manager.php');
 
  $PAGE->set_url(new moodle_url(url: '/local/message/edit.php'));
  $PAGE->set_context(\core\context\system::instance());
@@ -48,11 +50,11 @@ if ($mform->is_cancelled()) {
 } else if ($fromform = $mform->get_data()) {
     // When the form is submitted, and the data is successfully validated,
     // the `get_data()` function will return the data posted in the form.
-    $recordToInsert = new stdClass();
-    $recordToInsert->messagetext = $fromform->messagetext;
-    $recordToInsert->messagetype = $fromform->messagetype;
 
-    $DB->insert_record('local_message', $recordToInsert);
+    $manager = new local_message\core\message_manager();
+    $manager->create_message($fromform->messagetext, $fromform->messagetype);
+
+
 
     redirect($CFG->wwwroot . '/local/message/manage.php', message: get_string('posted_form', 'local_message') . $fromform->messagetext);
 

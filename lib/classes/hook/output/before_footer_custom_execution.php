@@ -13,11 +13,12 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-
-
 namespace core\hook\output;
 
+
+
 use stdClass;
+use local_message\message_manager;
 
 /**
  * Hook to allow subscribers to add HTML content to the footer.
@@ -61,15 +62,8 @@ final class before_footer_custom_execution {
         //$messages = $DB->get_records('local_message');
 
 
-        $sql = "SELECT lm.id, lm.messagetext, lm.messagetype FROM {local_message} lm
-                LEFT JOIN {local_message_read} lmr ON lm.id = lmr.messageid
-                WHERE lmr.userid != :userid OR lmr.userid IS NULL";
-
-        $params = [
-            "userid" => $USER->id
-        ];
-
-        $messages = $DB->get_records_sql($sql, $params);
+        $manager = new message_manager();
+        $messages = $manager->get_messages($USER->id);
 
         foreach($messages as $message){
             $type = \core\output\notification::NOTIFY_INFO;
@@ -85,11 +79,7 @@ final class before_footer_custom_execution {
             }
             \core\notification::add(message: $message->messagetext, level: $type);
 
-            $readRecord = new stdClass();
-            $readRecord->messageid = $message->id;
-            $readRecord->userid = $USER->id;
-            $readRecord->timeread = time();
-            $DB->insert_record('local_message_read', $readRecord);
+            $manager->mark_message_read($message->id, $USER->id);
         }
     }
 }
