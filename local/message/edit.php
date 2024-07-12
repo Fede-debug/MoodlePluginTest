@@ -23,7 +23,7 @@
  * @copyright  Federico Diana
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-use local_message\core\message_manager;
+
 
  $dirroot = $CFG->dirroot;
 
@@ -38,7 +38,7 @@ use local_message\core\message_manager;
 
 
  //echo '<h1>Hello World></h1>';
-$mform = new edit();
+$mform = new local_message\edit();
 
 
 
@@ -51,7 +51,7 @@ if ($mform->is_cancelled()) {
     // When the form is submitted, and the data is successfully validated,
     // the `get_data()` function will return the data posted in the form.
 
-    $manager = new local_message\core\message_manager();
+    $manager = new local_message\message_manager();
     $manager->create_message($fromform->messagetext, $fromform->messagetype);
 
 

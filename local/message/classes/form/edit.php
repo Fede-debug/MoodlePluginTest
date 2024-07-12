@@ -21,7 +21,12 @@
  * @var stdClass $plugin
  */
 
+ namespace local_message;
+
 require_once("$CFG->libdir/formslib.php");
+
+
+use moodleform;
 
 class edit extends moodleform {
     // Add elements to form.

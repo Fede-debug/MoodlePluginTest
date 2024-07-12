@@ -79,7 +79,7 @@ class message_manager
         $readRecord->messageid = $messageid;
         $readRecord->userid = $userid;
         $readRecord->timeread = time();
-        $DB->insert_record('local_message_read', $readRecord, false);    
+        return $DB->insert_record('local_message_read', $readRecord, false);    
         }
         catch (\dml_exception $e)
         {
