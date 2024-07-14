@@ -18,6 +18,9 @@ $CFG->dboptions = array (
   'dbcollation' => 'utf8mb4_unicode_ci',
 );
 
+// Prevent JS caching
+$CFG->cachejs = false; // NOT FOR PRODUCTION SERVERS!
+
 $CFG->wwwroot   = 'http://localhost/moodle';
 $CFG->dataroot  = '/opt/lampp/moodledata';
 $CFG->admin     = 'admin';
