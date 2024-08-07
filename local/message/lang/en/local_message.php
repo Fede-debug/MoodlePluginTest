@@ -31,3 +31,4 @@ $string['updated_posted_form'] = 'you updated this message: ';
 $string['manage_messages'] = 'Manage messages';
 $string['message_deletion'] = 'Delete message';
 $string['delete_message_confirm'] = 'Are you REALLY sure you want to delete the message?';
+$string['delete_button_modal'] = 'DELETE';

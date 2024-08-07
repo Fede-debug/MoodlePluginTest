@@ -44,24 +44,49 @@
 // });
 import ModalSaveCancel from 'core/modal_save_cancel';
 import {get_string as getString} from 'core/str';
-// import jQuery from 'jquery';
+import jQuery from 'jquery';
 import ModalEvents from 'core/modal_events';
 
-export const init = async (messageid) => {
+export const init = async (button) => {
     const modal = await ModalSaveCancel.create({
         title: getString('message_deletion', 'local_message'),
         body: getString('delete_message_confirm', 'local_message'),
-        // preShowCallBack: function() {
+        // preShowCallBack: function(triggerelement, modalsingle) {
         //     window.console.log('test');
+        //     window.console.log(triggerelement);
 
-        //     //modalP.params = {'messageid': messageid}
+        //     let classListString = triggerelement.classList[0];
+        //     let messageid = classListString.substr(classListString.lastIndexOf('local_message') + 'local_message'.length);
+
+        //     modalsingle.params = {'messageid': messageid};
         // }
     });
+
+    window.console.log(button);
     
-    modal.params = {'messageid': messageid};
+    modal.getRoot().on(ModalEvents.shown, (e) => {
+        // window.console.log('test');
+        //     window.console.log(e);
+
+        //     let triggerElement = $(e);
+
+        //     window.console.log(triggerElement);
+
+            let classListString = button.classList[0];
+            let messageid = classListString.substr(classListString.lastIndexOf('local_message') + 'local_message'.length);
+
+            this.params = {'messageid': messageid};
+
+    });
+
+
+
+
     modal.getRoot().on(ModalEvents.save, (e) => {
-        window.console.log('id getroot' + modal.params);
         e.preventDefault();
+
+        window.console.log('id getroot' + modal.params);
+
     });
 
     // ...
@@ -82,20 +107,24 @@ const deleteButtons = document.querySelectorAll('.local_message_delete_button');
 //deleteButton.addEventListener('click', onDeleteButtonClick);
 
 
-deleteButtons.forEach( button => {button.addEventListener('click', onDeleteButtonClick); 
-    let classListString = button.classList[0];
-    let myid = classListString.substr(classListString.lastIndexOf('local_message') + 'local_message'.length);
-button.myParam = myid;
+deleteButtons.forEach( button => {button.addEventListener('click', onDeleteButtonClick);
+    // let classListString = button.classList[0];
+    // let myid = classListString.substr(classListString.lastIndexOf('local_message') + 'local_message'.length);
+    //  button.myParam = myid;
                             });
 
 
 
-function onDeleteButtonClick(event){
-    
-    window.console.log('test');
-    Y.log('Y log test');
-//let messageid = classListString.substr(classListString.lastIndeOf('local_messageid') + 'local_messageid'.length);
-window.console.log(event.currentTarget.myParam);
+function onDeleteButtonClick(){
 
-    init.apply(event.currentTarget.myParam);
+    // window.console.log(this);
+    //Y.log('Y log test');
+//let messageid = classListString.substr(classListString.lastIndeOf('local_messageid') + 'local_messageid'.length);
+//window.console.log(event.currentTarget.myParam);
+
+let button = this;
+
+window.console.log(button);
+
+    init.call(this, button);
 }
