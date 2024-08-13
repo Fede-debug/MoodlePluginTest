@@ -60,6 +60,7 @@ export const init = async (button) => {
 
         //     modalsingle.params = {'messageid': messageid};
         // }
+        large: true
     });
 
     window.console.log(button);
@@ -75,17 +76,14 @@ export const init = async (button) => {
             let classListString = button.classList[0];
             let messageid = classListString.substr(classListString.lastIndexOf('local_message') + 'local_message'.length);
 
-            this.params = {'messageid': messageid};
+            modal.params = {'messageid': messageid};
 
     });
-
-
-
 
     modal.getRoot().on(ModalEvents.save, (e) => {
         e.preventDefault();
 
-        window.console.log('id getroot' + modal.params);
+        console.log(modal.params);
 
     });
 
