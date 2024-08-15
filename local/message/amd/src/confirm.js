@@ -43,9 +43,11 @@
 // });
 // });
 import ModalSaveCancel from 'core/modal_save_cancel';
-import {get_string as getString} from 'core/str';
+import { get_string as getString } from 'core/str';
 import jQuery from 'jquery';
 import ModalEvents from 'core/modal_events';
+import Ajax from 'core/ajax'
+import Notification from 'core/notification';
 
 export const init = async (button) => {
     const modal = await ModalSaveCancel.create({
@@ -64,7 +66,7 @@ export const init = async (button) => {
     });
 
     window.console.log(button);
-    
+
     modal.getRoot().on(ModalEvents.shown, (e) => {
         // window.console.log('test');
         //     window.console.log(e);
@@ -73,10 +75,10 @@ export const init = async (button) => {
 
         //     window.console.log(triggerElement);
 
-            let classListString = button.classList[0];
-            let messageid = classListString.substr(classListString.lastIndexOf('local_message') + 'local_message'.length);
+        let classListString = button.classList[0];
+        let messageid = classListString.substr(classListString.lastIndexOf('local_message') + 'local_message'.length);
 
-            modal.params = {'messageid': messageid};
+        modal.params = { 'messageid': messageid };
 
     });
 
@@ -84,6 +86,26 @@ export const init = async (button) => {
         e.preventDefault();
 
         console.log(modal.params);
+
+        let request = {
+            methodname: 'local_message_delete_message',
+            args: modal.params,
+        };
+
+        Ajax.call([request])[0].done(function (data) {
+            if (data === true) {
+                //window.location.reload();
+                console.log('deleted message successfully');
+            } else {
+                Notification.addNotification({
+                    message: getString('delete_message_failed', 'local_message'),
+                    type: 'error'
+                });
+            }
+        }).fail(function (error) {
+            console.log(error);
+            Notification.Exception;
+        });
 
     });
 
@@ -105,24 +127,25 @@ const deleteButtons = document.querySelectorAll('.local_message_delete_button');
 //deleteButton.addEventListener('click', onDeleteButtonClick);
 
 
-deleteButtons.forEach( button => {button.addEventListener('click', onDeleteButtonClick);
+deleteButtons.forEach(button => {
+    button.addEventListener('click', onDeleteButtonClick);
     // let classListString = button.classList[0];
     // let myid = classListString.substr(classListString.lastIndexOf('local_message') + 'local_message'.length);
     //  button.myParam = myid;
-                            });
+});
 
 
 
-function onDeleteButtonClick(){
+function onDeleteButtonClick() {
 
     // window.console.log(this);
     //Y.log('Y log test');
-//let messageid = classListString.substr(classListString.lastIndeOf('local_messageid') + 'local_messageid'.length);
-//window.console.log(event.currentTarget.myParam);
+    //let messageid = classListString.substr(classListString.lastIndeOf('local_messageid') + 'local_messageid'.length);
+    //window.console.log(event.currentTarget.myParam);
 
-let button = this;
+    let button = this;
 
-window.console.log(button);
+    window.console.log(button);
 
     init.call(this, button);
 }

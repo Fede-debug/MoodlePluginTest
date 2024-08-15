@@ -32,3 +32,5 @@ $string['manage_messages'] = 'Manage messages';
 $string['message_deletion'] = 'Delete message';
 $string['delete_message_confirm'] = 'Are you REALLY sure you want to delete the message?';
 $string['delete_button_modal'] = 'DELETE';
+$string['delete_message_failed'] = 'There was an error while deleting the message';
+

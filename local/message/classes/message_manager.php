@@ -114,4 +114,23 @@ class message_manager
             return false;
         }
     }
+
+    public function delete_message($messageid) : bool{
+        global $DB;
+
+        try {
+            $transaction = $DB->start_delegated_transaction();
+
+            $deletedMessage = $DB->delete_records('local_message', ['id' => $messageid]);
+            $deletedRead = $DB->delete_records('local_message_read', ['messageid' => $messageid]);
+
+            if($deletedMessage && $deletedRead) {
+                $DB->commit_delegated_transaction($transaction);
+            }
+
+            return true;
+        } catch (\dml_exception $e) {
+            return false;
+        }
+    }
 }
