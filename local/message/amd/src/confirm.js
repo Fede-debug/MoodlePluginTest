@@ -85,6 +85,11 @@ export const init = async (button) => {
     modal.getRoot().on(ModalEvents.save, (e) => {
         e.preventDefault();
 
+        let footer = Y.one('.modal-footer');
+        footer.setContent('Deleting...');
+        let spinner = M.util.add_spinner(Y, footer);
+        spinner.show();
+
         console.log(modal.params);
 
         let request = {
@@ -93,8 +98,9 @@ export const init = async (button) => {
         };
 
         Ajax.call([request])[0].done(function (data) {
+
             if (data === true) {
-                //window.location.reload();
+                window.location.reload();
                 console.log('deleted message successfully');
             } else {
                 Notification.addNotification({
@@ -102,8 +108,8 @@ export const init = async (button) => {
                     type: 'error'
                 });
             }
-        }).fail(function (error) {
-            console.log(error);
+        }).fail(function (jqXHR, textStatus, errorThrown) {
+            console.log(errorThrown);
             Notification.Exception;
         });
 
