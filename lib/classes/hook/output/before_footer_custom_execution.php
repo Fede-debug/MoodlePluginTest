@@ -61,6 +61,10 @@ final class before_footer_custom_execution {
 
         //$messages = $DB->get_records('local_message');
 
+        if (!get_config('local_message', 'enabled')) {
+           return;
+        }
+
 
         $manager = new message_manager();
         $messages = $manager->get_messages($USER->id);

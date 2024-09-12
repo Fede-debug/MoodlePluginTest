@@ -33,4 +33,8 @@ $string['message_deletion'] = 'Delete message';
 $string['delete_message_confirm'] = 'Are you REALLY sure you want to delete the message?';
 $string['delete_button_modal'] = 'DELETE';
 $string['delete_message_failed'] = 'There was an error while deleting the message';
+$string['pluginname'] = 'Broadcast messages';
+$string['manage'] = 'Manage broadcast messages';
+$string['settings_enable'] = 'Enable';
+$string['settings_enable_desc'] = 'Disable to stop any messages from this plugin being displayed';
 
