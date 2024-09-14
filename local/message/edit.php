@@ -31,6 +31,14 @@
  require_once($CFG->dirroot .'/local/message/classes/form/edit.php');
  require_once($CFG->dirroot .'/local/message/classes/message_manager.php');
 
+ 
+ 
+ //require_admin();
+
+ require_login();
+ $context = \context_system::instance();
+ require_capability('local/message:managemessages', $context);
+
  $PAGE->set_url(new moodle_url(url: '/local/message/edit.php'));
  $PAGE->set_context(\core\context\system::instance());
  $PAGE->set_title(title: 'Edit');

@@ -37,4 +37,5 @@ $string['pluginname'] = 'Broadcast messages';
 $string['manage'] = 'Manage broadcast messages';
 $string['settings_enable'] = 'Enable';
 $string['settings_enable_desc'] = 'Disable to stop any messages from this plugin being displayed';
+$string['message:managemessages'] = 'Manage messages';
 

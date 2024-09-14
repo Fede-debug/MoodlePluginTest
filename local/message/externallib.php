@@ -39,7 +39,10 @@ use local_message\message_manager;
     }
 
     public static function delete_message($messageid) {
-        $params = self::validate_parameters(self::delete_message_parameters(), ['messageid' => $messageid]);   
+        $params = self::validate_parameters(self::delete_message_parameters(), ['messageid' => $messageid]);
+        
+        $context = \context_system::instance();
+    require_capability('local/message:managemessages', $context);
 
         $manager = new message_manager();
         $manager->delete_message($messageid);
