@@ -133,4 +133,16 @@ class message_manager
             return false;
         }
     }
+
+    public function get_all_messages(): array
+    {
+        global $DB, $USER;
+
+        try {
+
+            return $messages = $DB->get_records('local_message');
+        } catch (\dml_exception $e) {
+            return [];
+        }
+    }
 }

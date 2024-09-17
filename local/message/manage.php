@@ -49,7 +49,8 @@
 
 $templateContext = (object)[
     'messages' => array_values($messages),
-    'editurl' => new moodle_url('/local/message/edit.php')
+    'editurl' => new moodle_url('/local/message/edit.php'),
+    'bulkediturl' => new moodle_url('/local/message/bulkedit.php'),
 ];
 
 echo $OUTPUT->render_from_template('local_message/manage', $templateContext);
