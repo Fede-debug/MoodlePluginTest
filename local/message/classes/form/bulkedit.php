@@ -45,7 +45,7 @@ class bulkedit extends moodleform {
         }
         $mform->addGroup($messagegroup, 'messages', 'Choose your messages', '<br>');
 
-        $mform->addElement('static', 'todo', 'What do you want to do with your selected messages');
+        $mform->addElement('static', 'todo', 'What do you want to do with your selected messages?');
         
 
         $choices = [];

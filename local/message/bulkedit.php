@@ -59,14 +59,28 @@ if ($mform->is_cancelled()) {
     // When the form is submitted, and the data is successfully validated,
     // the `get_data()` function will return the data posted in the form.
 
-    //redirect($CFG->wwwroot . '/local/message/manage.php', message: get_string('posted_form', 'local_message') . $fromform->messagetext);
+    
     $messages = $fromform->messages;
 
-    if($fromform->deleteall == true){
-        $manager->delete_messages($messages);
+    $messageids = [];
+
+    foreach($messages as $key => $enabled){
+        if ($enabled){
+            $messageids[] = substr($key, 9);
+        }
     }
 
-    $manager->update_messages($messages);
+    if ($messageids){
+        if($fromform->deleteAll == true){
+            $manager->delete_messages($messageids);
+        } else {
+            $manager->update_messages($messageids, $fromform->messagetype);
+        }       
+}
+
+    redirect($CFG->wwwroot . '/local/message/manage.php', 'Bulk edit successful!');
+
+
 }
 
 

@@ -41,6 +41,9 @@
 
  $PAGE->requires->js_call_amd('local_message/confirm');
 
+ 
+ $PAGE->requires->css('/local/message/styles.css');
+
  $messages = $DB->get_records('local_message', null, 'id');
 
  echo $OUTPUT->header();

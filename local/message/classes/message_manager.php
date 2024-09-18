@@ -145,4 +145,31 @@ class message_manager
             return [];
         }
     }
+
+    /** Delete all messages by id.
+     * @param $messageids
+     * @return bool
+     */
+    public function delete_messages($messageids)
+    {
+        global $DB;
+        $transaction = $DB->start_delegated_transaction();
+        list($ids, $params) = $DB->get_in_or_equal($messageids);
+        $deletedMessages = $DB->delete_records_select('local_message', "id $ids", $params);
+        $deletedReads = $DB->delete_records_select('local_message_read', "messageid $ids", $params);
+        if ($deletedMessages && $deletedReads) {
+            $DB->commit_delegated_transaction($transaction);
+        }
+        return true;
+    }
+
+      /** Update the type for an array of messages.
+     * @return bool message data or false if not found.
+     */
+    public function update_messages(array $messageids, $type): bool
+    {
+        global $DB;
+        list($ids, $params) = $DB->get_in_or_equal($messageids);
+        return $DB->set_field_select('local_message', 'messagetype', $type, "id $ids", $params);
+    }
 }
